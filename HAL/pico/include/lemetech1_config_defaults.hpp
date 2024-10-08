@@ -125,26 +125,12 @@ const Config default_lemetech1_config = {
             .activation_binding_count = 3,
             .activation_binding = { BTN_LT2, BTN_MB1, BTN_LF1 }, 
         }, 
-        GameModeConfig {
-            .mode_id = MODE_MELEE_MODZ,
-            .name = "MELEE",
-            .socd_pairs_count = 4,
-            .socd_pairs = {
-                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_2IP_NO_REAC },
-                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_2IP_NO_REAC },
-            },
-            .button_remapping_count = 0,
-            .activation_binding_count = 3,
-            .activation_binding = { BTN_LT1, BTN_MB1, BTN_LF4 },
-        },
     },
     .communication_backend_configs_count = 8,
     .communication_backend_configs = {
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_XINPUT,
-            .default_mode_config = 9,
+            .default_mode_config = 1,
             .activation_binding_count = 1,
             .activation_binding = { BTN_RF4 },
         },
@@ -225,7 +211,13 @@ const Config default_lemetech1_config = {
     .rumble = false,
     .limitOutputs = true,
     .travelTime = false,
-    .meleeCWOS = true
+    .meleeCWOS = false,
+    .true_z_press = false,
+    .modx_x_wd = 51, // def: 51 
+    .modx_y_wd = 30, // def: 30
+    .meleeModZ = true,
+    .mody_x_wd = 40, // def: 40
+    .mody_y_wd = 68, // def: 68
 };
 
 // clang-format on

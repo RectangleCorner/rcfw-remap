@@ -23,10 +23,9 @@ class CommunicationBackend {
     virtual CommunicationBackendId BackendId();
     virtual void SetGameMode(InputMode *gamemode);
     virtual InputMode *CurrentGameMode();
-    void LimitOutputs(const uint32_t sampleSpacing);
-    void LimitOutputsHax(const uint32_t sampleSpacing);
+    void LimitOutputs(const uint32_t sampleSpacing, const bool travelTime);
 
-    virtual void SendReport() = 0;
+    virtual void SendReport(bool isMelee) = 0;
 
   protected:
     InputState &_inputs;

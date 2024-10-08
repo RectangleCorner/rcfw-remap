@@ -34,7 +34,7 @@ class ConfiguratorBackend : public CommunicationBackend {
         Stream &stream
     );
     CommunicationBackendId BackendId();
-    void SendReport();
+    void SendReport(bool isMelee);
 
   private:
     size_t ReadPacket(uint8_t *buffer, size_t max_len);

@@ -18,7 +18,7 @@ B0XXInputViewer::~B0XXInputViewer() {
     serial::close();
 }
 
-void B0XXInputViewer::SendReport() {
+void B0XXInputViewer::SendReport(bool isMelee) {
     if (serial::available_for_write() < 32) {
         return;
     }

@@ -111,7 +111,7 @@ CommunicationBackendId NintendoSwitchBackend::BackendId() {
     return COMMS_BACKEND_NINTENDO_SWITCH;
 }
 
-void NintendoSwitchBackend::SendReport() {
+void NintendoSwitchBackend::SendReport(bool isMelee) {
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);
 

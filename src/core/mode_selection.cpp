@@ -59,7 +59,11 @@ void set_mode(CommunicationBackend *backend, KeyboardMode *mode) {
 void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config &config) {
     switch (mode_config.mode_id) {
         case MODE_MELEE:
-            if (config.travelTime == true) {
+            if (config.meleeModZ == true) {
+                melee_modZ.SetConfig(mode_config, config.melee_options, config.meleeCWOS);
+                set_mode(backend, &melee_modZ);
+                break;
+            } else if (config.travelTime == true) {
                 melee_nerfed.SetConfig(mode_config, config.melee_options, config.meleeCWOS);
                 set_mode(backend, &melee_nerfed);
             } else {

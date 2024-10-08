@@ -14,11 +14,11 @@
 #include <config.pb.h>
 #include <cstring> // display
 #include <string> //display
-std::string dispMode = "";
-std::string dispCommBackend = "BACKEND";
 
 Config config = default_config;
-
+std::string dispCommBackend = "BACKEND";
+std::string dispMode = "";
+bool isMelee = false;
 GpioButtonMapping button_mappings[] = {
     { BTN_LF1, 2  },
     { BTN_LF2, 3  },
@@ -86,7 +86,7 @@ void setup() {
         persistence.SaveConfig(config);
     }
     // Create array of input sources to be used.
-    static InputSource *input_sources[] = { &gpio_input };
+    static InputSource *input_sources[] = {};
     size_t input_source_count = sizeof(input_sources) / sizeof(InputSource *);
 
     backend_count =
@@ -99,7 +99,7 @@ void loop() {
     select_mode(backends, backend_count, config);
 
     for (size_t i = 0; i < backend_count; i++) {
-        backends[i]->SendReport();
+        backends[i]->SendReport(isMelee);
     }
 
     if (current_kb_mode != nullptr) {
@@ -110,9 +110,11 @@ void loop() {
 /* Button inputs are read from the second core */
 
 void setup1() {
-    while (backends == nullptr) {
-        tight_loop_contents();
+    while (!backend_count || backends == nullptr) {
+        delay(1);
     }
+
+    // These have to be initialized after backends.
     CommunicationBackendId primary_backend_id = backends[0]->BackendId();
     switch (primary_backend_id) {
         case COMMS_BACKEND_DINPUT:
@@ -130,8 +132,6 @@ void setup1() {
         case COMMS_BACKEND_N64:
             dispCommBackend = "N64";
             break;
-        case COMMS_BACKEND_SNES:
-            dispCommBackend = "SNES";
         case COMMS_BACKEND_UNSPECIFIED: // Fall back to configurator if invalid
                                         // backend selected.
         case COMMS_BACKEND_CONFIGURATOR:
@@ -143,12 +143,13 @@ void setup1() {
 
 void loop1() {
     if (backends != nullptr) {
+        gpio_input.UpdateInputs(backends[0]->GetInputs());
         if (dispCommBackend != "CONFIG") {
             dispMode = backends[0]->CurrentGameMode()->GetConfig()->name;
         }
-        gpio_input.UpdateInputs(backends[0]->GetInputs());
     }
     if (dispMode == "MELEE") {
+        isMelee = true;
         // get exactly 2 khz input scanning
         const uint32_t interval = 500; // microseconds
         const uint32_t quarterInterval = interval / 4; // unit of 4 microseconds
@@ -162,11 +163,9 @@ void loop1() {
         for (size_t i = 0; i < backend_count; i++) {
             backends[i]->ScanInputs();
             backends[i]->UpdateOutputs();
-            if (config.travelTime == true) {
-                backends[i]->LimitOutputs(quarterInterval);
-            } else {
-                backends[i]->LimitOutputsHax(quarterInterval);
-            }
+            backends[i]->LimitOutputs(quarterInterval, config.travelTime);
         }
+    } else {
+        isMelee = false;
     }
 }

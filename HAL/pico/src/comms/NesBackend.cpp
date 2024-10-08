@@ -18,7 +18,7 @@ CommunicationBackendId NesBackend::BackendId() {
     return COMMS_BACKEND_SNES;
 }
 
-void NesBackend::SendReport() {
+void NesBackend::SendReport(bool isMelee) {
     ScanInputs();
 
     // Run gamemode logic

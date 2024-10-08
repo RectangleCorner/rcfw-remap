@@ -9,7 +9,7 @@
 class MeleeModZ : public ControllerMode {
   public:
     MeleeModZ();
-    void SetConfig(GameModeConfig &config, const MeleeOptions options);
+    void SetConfig(GameModeConfig &config, const MeleeOptions optionss, const bool cwos);
 
   protected:
     void UpdateDigitalOutputs(const InputState &inputs, OutputState &outputs);
@@ -17,8 +17,8 @@ class MeleeModZ : public ControllerMode {
 
   private:
     MeleeOptions _options;
+    bool _cwos;
     bool _horizontal_socd;
-
     void HandleSocd(InputState &inputs);
 };
 

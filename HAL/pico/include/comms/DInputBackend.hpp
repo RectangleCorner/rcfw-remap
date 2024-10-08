@@ -12,7 +12,7 @@ class DInputBackend : public CommunicationBackend {
     DInputBackend(InputState &inputs, InputSource **input_sources, size_t input_source_count);
     ~DInputBackend();
     CommunicationBackendId BackendId();
-    void SendReport();
+    void SendReport(bool isMelee);
 
   private:
     TUGamepad _gamepad;

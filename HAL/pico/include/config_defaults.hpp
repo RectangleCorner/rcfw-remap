@@ -208,10 +208,16 @@ const Config default_config = {
         .true_z_press = false,
         .disable_ledgedash_socd_override = false,
     },
-    .rumble = false,
+    .rumble = true,
     .limitOutputs = true,
-    .travelTime = false,
-    .meleeCWOS = true
+    .travelTime = true,
+    .meleeCWOS = true,
+    .true_z_press = false,
+    .modx_x_wd = 51, // def: 51 
+    .modx_y_wd = 30, // def: 30
+    .meleeModZ = false,
+    .mody_x_wd = 40, // def: 40
+    .mody_y_wd = 68, // def: 68
 };
 
 // clang-format on

@@ -11,7 +11,7 @@ class XInputBackend : public CommunicationBackend {
   public:
     XInputBackend(InputState &inputs, InputSource **input_sources, size_t input_source_count);
     CommunicationBackendId BackendId();
-    void SendReport();
+    void SendReport(bool isMelee);
 
   private:
     Adafruit_USBD_XInput _xinput;

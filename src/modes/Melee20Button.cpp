@@ -40,6 +40,11 @@ void Melee20Button::UpdateDigitalOutputs(const InputState &inputs, OutputState &
         outputs.dpadLeft = inputs.rt3;
         outputs.dpadRight = inputs.rt5;
     }
+
+    if (inputs.mb3)
+        outputs.dpadLeft = true;
+    if (inputs.mb4)
+        outputs.dpadRight = true;
 }
 
 void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
@@ -90,12 +95,12 @@ void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &o
                 outputs.leftStickY = 128 + (directions.y * _options.custom_airdodge.y);
             } else {
                 // MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
-                // outputs.leftStickX = 128 + (directions.x * 51);
-                // outputs.leftStickY = 128 + (directions.y * 30);
+                outputs.leftStickX = 128 + (directions.x * 51);
+                outputs.leftStickY = 128 + (directions.y * 30);
 
                 // marth max 26.93 deg 6875 4000
-                outputs.leftStickX = 128 + (directions.x * 55);
-                outputs.leftStickY = 128 + (directions.y * 28);
+                // outputs.leftStickX = 128 + (directions.x * 55);
+                // outputs.leftStickY = 128 + (directions.y * 28);
             }
         }
 

@@ -42,7 +42,7 @@ CommunicationBackendId ConfiguratorBackend::BackendId() {
     return COMMS_BACKEND_CONFIGURATOR;
 }
 
-void ConfiguratorBackend::SendReport() {
+void ConfiguratorBackend::SendReport(bool isMelee) {
     int data = ReadByte();
     if (data < 0) {
         if (data == _in.EOP) {

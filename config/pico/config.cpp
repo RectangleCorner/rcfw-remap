@@ -12,7 +12,8 @@
 #include "stdlib.hpp"
 
 #include <config.pb.h>
-
+std::string dispCommBackend = "BACKEND";
+std::string dispMode = "";
 Config config = default_config;
 
 GpioButtonMapping button_mappings[] = {

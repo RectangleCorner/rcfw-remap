@@ -65,10 +65,10 @@ InputMode *CommunicationBackend::CurrentGameMode() {
     return _gamemode;
 }
 
-void CommunicationBackend::LimitOutputs(const uint32_t sampleSpacing) {
-    limitOutputs(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
-}
-
-void CommunicationBackend::LimitOutputsHax(const uint32_t sampleSpacing) {
-    limitOutputsHax(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
+void CommunicationBackend::LimitOutputs(const uint32_t sampleSpacing, const bool travelTime) {
+    if (travelTime) {
+        limitOutputs(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
+    } else {
+        limitOutputsHax(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
+    }
 }

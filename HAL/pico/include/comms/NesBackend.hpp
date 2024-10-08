@@ -19,7 +19,7 @@ class NesBackend : public CommunicationBackend {
         int offset = -1
     );
     CommunicationBackendId BackendId();
-    void SendReport();
+    void SendReport(bool isMelee);
     int GetOffset();
 
   private:

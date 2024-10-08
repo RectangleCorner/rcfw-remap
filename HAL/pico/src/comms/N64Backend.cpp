@@ -23,7 +23,7 @@ CommunicationBackendId N64Backend::BackendId() {
     return COMMS_BACKEND_N64;
 }
 
-void N64Backend::SendReport() {
+void N64Backend::SendReport(bool isMelee) {
     // Update slower inputs before we start waiting for poll.
     ScanInputs(InputScanSpeed::SLOW);
     ScanInputs(InputScanSpeed::MEDIUM);

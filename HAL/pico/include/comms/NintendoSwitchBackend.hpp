@@ -51,7 +51,7 @@ class NintendoSwitchBackend : public CommunicationBackend {
     static void RegisterDescriptor();
 
     CommunicationBackendId BackendId();
-    void SendReport();
+    void SendReport(bool isMelee);
 
   protected:
     static const uint8_t _report_id = 0;
