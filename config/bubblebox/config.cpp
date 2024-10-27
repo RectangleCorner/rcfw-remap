@@ -28,10 +28,10 @@ GpioButtonMapping button_mappings[] = {
     { BTN_LT1, 6  },
     { BTN_LT2, 7  },
 
-    { BTN_MB1, 0  },
+    { BTN_MB1, 11 },
     { BTN_MB2, 1  },
     { BTN_MB3, 10 },
-    { BTN_MB4, 11 },
+    { BTN_MB4, 0  },
 
     { BTN_RT1, 14 },
     { BTN_RT2, 15 },

@@ -26,8 +26,8 @@ void WingmanFgcMode::UpdateDigitalOutputs(const InputState &inputs, OutputState 
     outputs.triggerLDigital = inputs.rf4;
 
     // Right hand top row
-    outputs.x = inputs.rf5;
-    outputs.y = inputs.rf6;
+    outputs.x = inputs.rf6;
+    outputs.y = inputs.rf5;
     outputs.buttonR = inputs.rf7;
     outputs.buttonL = inputs.rf8;
 }

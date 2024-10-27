@@ -8,6 +8,7 @@
 #include "modes/MeleeModZ.hpp"
 #include "modes/MeleeNerfs.hpp"
 #include "modes/ProjectM.hpp"
+#include "modes/Rivals2.hpp"
 #include "modes/RivalsOfAether.hpp"
 #include "modes/Smash64.hpp"
 #include "modes/Ultimate.hpp"
@@ -29,6 +30,7 @@ Smash64 smash64;
 MeleeModZ melee_modZ;
 MeleeNerfs melee_nerfed;
 MultiVersus mvs;
+Rivals2 rivals2;
 
 uint64_t mode_activation_masks[10];
 
@@ -86,6 +88,10 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
         case MODE_RIVALS_OF_AETHER:
             rivals_mode.SetConfig(mode_config);
             set_mode(backend, &rivals_mode);
+            break;
+        case MODE_RIVALS2:
+            rivals2.SetConfig(mode_config);
+            set_mode(backend, &rivals2);
             break;
         case MODE_SMASH64:
             smash64.SetConfig(mode_config);
