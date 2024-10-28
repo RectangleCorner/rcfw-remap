@@ -97,7 +97,7 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                 // 5250 7125 - 36.38deg                     - 42 57 - modZ Y<0
                 // modY and modX are asymmetric to avoid shield drop down coords
                 // 3875 7125 - 28.54deg ("fuzzing safe" 27) - 31 57 - modY
-                // 3000 7750 - 23.09deg ("fuzzing safe" 20) - 24 62 - modY + modZ
+                // 3000 7750 - 21.16deg ("fuzzing safe" 20) - 24 62 - modY + modZ
                 if (inputs.lt1 && !inputs.lt2 && !inputs.mb2) { // modX
                     outputs.leftStickX = 128 + (directions.x * 55);
                     outputs.leftStickY = 128 + (directions.y * 30);
@@ -129,8 +129,8 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                     // manually override MY + MZ to MX angle if holding shield
                     // to comply with 27deg limitation and avoid being clamped
                     if (shield_button_pressed) {
-                        outputs.leftStickX = 128 + (directions.x * 30);
-                        outputs.leftStickY = 128 + (directions.y * 55);
+                        outputs.leftStickX = 128 + (directions.x * 31);
+                        outputs.leftStickY = 128 + (directions.y * 57);
                     } else {
                         outputs.leftStickX = 128 + (directions.x * 24);
                         outputs.leftStickY = 128 + (directions.y * 62);
