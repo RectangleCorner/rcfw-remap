@@ -214,6 +214,10 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                 if (directions.vertical) {
                     outputs.leftStickY = 128 + (directions.y * 59);
                 }
+                // Turnaround neutral B nerf
+                if (inputs.rf1) {
+                    outputs.leftStickX = 128 + (directions.x * 80);
+                }
             }
         }
 
@@ -227,12 +231,6 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
             }
         }
 
-        if (inputs.lt2) {
-            // Turnaround neutral B nerf
-            if (inputs.rf1) {
-                outputs.leftStickX = 128 + (directions.x * 80);
-            }
-        }
     }
 
     // C-stick ASDI Slideoff angle overrides any other C-stick modifiers (such as
