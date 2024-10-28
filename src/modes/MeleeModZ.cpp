@@ -91,18 +91,27 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                 // 6375 4625 - 35.96deg                     - 51 37 - modX + modY
                 // 45deg - above these is angle off X-axis, below is angle off Y-axis
                 ///////// 5125 7000 - 36.21deg                     - 41 56 - modZ
-                // 4625 6375 - 35.96deg                     - 37 51 - modZ
-                // 3750 6875 - 28.61deg ("fuzzing safe" 27) - 30 55 - modY
+                // modZ and modX + modY are asymmetric for Y>0 to avoid 2f turnaround utilt/dtilt coords
+                // modZ and modX + modY are asymmetric for Y<0 to avoid shield drop down coords
+                // 5000 6750 - 36.53deg                     - 40 54 - modZ Y>0
+                // 5250 7125 - 36.38deg                     - 42 57 - modZ Y<0
+                // modY and modX are asymmetric to avoid shield drop down coords
+                // 3875 7125 - 28.54deg ("fuzzing safe" 27) - 31 57 - modY
                 // 3000 7750 - 23.09deg ("fuzzing safe" 20) - 24 62 - modY + modZ
                 if (inputs.lt1 && !inputs.lt2 && !inputs.mb2) { // modX
                     outputs.leftStickX = 128 + (directions.x * 55);
                     outputs.leftStickY = 128 + (directions.y * 30);
                 } else if (!inputs.lt1 && inputs.lt2 && !inputs.mb2) { // modY
-                    outputs.leftStickX = 128 + (directions.x * 30);
-                    outputs.leftStickY = 128 + (directions.y * 55);
+                    outputs.leftStickX = 128 + (directions.x * 31);
+                    outputs.leftStickY = 128 + (directions.y * 57);
                 } else if (!inputs.lt1 && !inputs.lt2 && inputs.mb2) { // modZ
-                    outputs.leftStickX = 128 + (directions.x * 37);
-                    outputs.leftStickY = 128 + (directions.y * 51);
+                    if (directions.y == -1) {
+                        outputs.leftStickX = 128 + (directions.x * 42);
+                        outputs.leftStickY = 128 + (directions.y * 57);
+                    } else {
+                        outputs.leftStickX = 128 + (directions.x * 40);
+                        outputs.leftStickY = 128 + (directions.y * 54);
+                    }
                 } else if (inputs.lt1 && inputs.lt2 && !inputs.mb2) { // modX + modY
                     outputs.leftStickX = 128 + (directions.x * 51);
                     outputs.leftStickY = 128 + (directions.y * 37);
@@ -133,7 +142,9 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                 // Conditionals are ordered to be easy to read the conditions
                 // 9250 3625 - 21.40deg                     - 74 29 - modX + modZ
                 // 8750 4750 - 28.50deg ("fuzzing safe" 27) - 70 38 - modX
-                // 8000 5875 - 36.29deg                     - 64 47 - modX + modY
+                // modX + modY and modZ are asymmetric to avoid banned no buffer jumpless up b coords
+                // 7375 5375 - 36.09deg                     - 59 43 - modX + modY Y>0
+                // 8000 5875 - 36.09deg                     - 64 47 - modX + modY Y<0
                 // 45deg - above these is angle off X-axis, below is angle off Y-axis
                 // 5875 8000 - 36.29deg                     - 47 64 - modZ
                 // 4750 8750 - 28.50deg ("fuzzing safe" 27) - 38 70 - modY
@@ -149,8 +160,15 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                     outputs.leftStickX = 128 + (directions.x * 47);
                     outputs.leftStickY = 128 + (directions.y * 64);
                 } else if (inputs.lt1 && inputs.lt2 && !inputs.mb2) { // modX + modY
-                    outputs.leftStickX = 128 + (directions.x * 64);
-                    outputs.leftStickY = 128 + (directions.y * 47);
+
+
+                    if (direction.y == -1) {
+                        outputs.leftStickX = 128 + (directions.x * 64);
+                        outputs.leftStickY = 128 + (directions.y * 47);
+                    } else {
+                        outputs.leftStickX = 128 + (directions.x * 59);
+                        outputs.leftStickY = 128 + (directions.y * 43);
+                    }
                 } else if (inputs.lt1 && !inputs.lt2 && inputs.mb2) { // modX + modZ
                     // manually override MX + MZ to MX angle if holding shield
                     // to comply with 27deg limitation and avoid being clamped
