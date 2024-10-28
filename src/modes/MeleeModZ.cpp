@@ -142,7 +142,7 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                 // Conditionals are ordered to be easy to read the conditions
                 // 9250 3625 - 21.40deg                     - 74 29 - modX + modZ
                 // 8750 4750 - 28.50deg ("fuzzing safe" 27) - 70 38 - modX
-                // modX + modY and modZ are asymmetric to avoid banned no buffer jumpless up b coords
+                // modX + modY and modZ are asymmetric for Y>0 to avoid no buffer jumpless up b coords
                 // 7375 5375 - 36.09deg                     - 59 43 - modX + modY Y>0
                 // 8000 5875 - 36.09deg                     - 64 47 - modX + modY Y<0
                 // 45deg - above these is angle off X-axis, below is angle off Y-axis
@@ -160,9 +160,7 @@ void MeleeModZ::UpdateAnalogOutputs(const InputState &inputs, OutputState &outpu
                     outputs.leftStickX = 128 + (directions.x * 47);
                     outputs.leftStickY = 128 + (directions.y * 64);
                 } else if (inputs.lt1 && inputs.lt2 && !inputs.mb2) { // modX + modY
-
-
-                    if (direction.y == -1) {
+                    if (directions.y == -1) {
                         outputs.leftStickX = 128 + (directions.x * 64);
                         outputs.leftStickY = 128 + (directions.y * 47);
                     } else {
