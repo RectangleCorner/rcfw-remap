@@ -90,7 +90,8 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
         }
 
         /* Extra DI, Air Dodge, and Up B angles */
-        if (directions.diagonal && !inputs.rf1 && !inputs.rf3) { // 80% mag
+        if (directions.diagonal &&
+            ((!inputs.rf1 && !inputs.rf3) || (inputs.rf1 && inputs.rf3))) { // 80% mag
             outputs.leftStickX = 128 + (directions.x * 74);
             outputs.leftStickY = 128 + (directions.y * 47);
 
@@ -170,105 +171,106 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
                 outputs.leftStickY = 128 + (directions.y * 43);
             }
         }
+    }
 
-        if (inputs.lt2) {
-            if (directions.horizontal) {
-                outputs.leftStickX = 128 + (directions.x * 75);
-            }
-
-            if (directions.vertical) {
-                outputs.leftStickY = 128 + (directions.y * 98);
-            }
-
-            /* Extra DI, Air Dodge, and Up B angles */
-            if (directions.diagonal && !inputs.rf1 && !inputs.rf3) { // 80% mag
-                outputs.leftStickX = 128 + (directions.x * 47);
-                outputs.leftStickY = 128 + (directions.y * 74);
-
-                // Angles just for DI and Up B
-                if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 49);
-                    outputs.leftStickY = 128 + (directions.y * 71);
-                }
-
-                // Angles just for DI
-                if (inputs.rt3) {
-                    outputs.leftStickX = 128 + (directions.x * 51);
-                    outputs.leftStickY = 128 + (directions.y * 68);
-                }
-
-                if (inputs.rt4) {
-                    outputs.leftStickX = 128 + (directions.x * 54);
-                    outputs.leftStickY = 128 + (directions.y * 65);
-                }
-
-                if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 57);
-                    outputs.leftStickY = 128 + (directions.y * 61);
-                }
-            } else if (directions.diagonal && inputs.rf1 && !inputs.rf3) { // 100% mag
-                outputs.leftStickX = 128 + (directions.x * 58);
-                outputs.leftStickY = 128 + (directions.y * 92);
-
-                // Angles just for DI and Up B
-                if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 61);
-                    outputs.leftStickY = 128 + (directions.y * 89);
-                }
-
-                // Angles just for DI
-                if (inputs.rt3) {
-                    outputs.leftStickX = 128 + (directions.x * 64);
-                    outputs.leftStickY = 128 + (directions.y * 85);
-                }
-
-                if (inputs.rt4) {
-                    outputs.leftStickX = 128 + (directions.x * 67);
-                    outputs.leftStickY = 128 + (directions.y * 81);
-                }
-
-                if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 71);
-                    outputs.leftStickY = 128 + (directions.y * 76);
-                }
-            } else if (directions.diagonal && !inputs.rf1 && inputs.rf3) { // 60% mag
-                outputs.leftStickX = 128 + (directions.x * 35);
-                outputs.leftStickY = 128 + (directions.y * 55);
-
-                // Angles just for DI and Up B
-                if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 37);
-                    outputs.leftStickY = 128 + (directions.y * 53);
-                }
-
-                // Angles just for DI
-                if (inputs.rt3) {
-                    outputs.leftStickX = 128 + (directions.x * 38);
-                    outputs.leftStickY = 128 + (directions.y * 51);
-                }
-
-                if (inputs.rt4) {
-                    outputs.leftStickX = 128 + (directions.x * 40);
-                    outputs.leftStickY = 128 + (directions.y * 48);
-                }
-
-                if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 43);
-                    outputs.leftStickY = 128 + (directions.y * 46);
-                }
-            }
+    if (inputs.lt2) {
+        if (directions.horizontal) {
+            outputs.leftStickX = 128 + (directions.x * 75);
         }
 
-        // Shut off C-stick when using D-Pad layer.
-        if ((inputs.lt1 && inputs.lt2) || inputs.mb2) {
-            outputs.rightStickX = 128;
-            outputs.rightStickY = 128;
+        if (directions.vertical) {
+            outputs.leftStickY = 128 + (directions.y * 98);
         }
 
-        // Nunchuk overrides left stick.
-        if (inputs.nunchuk_connected) {
-            outputs.leftStickX = inputs.nunchuk_x;
-            outputs.leftStickY = inputs.nunchuk_y;
+        /* Extra DI, Air Dodge, and Up B angles */
+        if (directions.diagonal &&
+            ((!inputs.rf1 && !inputs.rf3) || (inputs.rf1 && inputs.rf3))) { // 80% mag
+            outputs.leftStickX = 128 + (directions.x * 47);
+            outputs.leftStickY = 128 + (directions.y * 74);
+
+            // Angles just for DI and Up B
+            if (inputs.rt2) {
+                outputs.leftStickX = 128 + (directions.x * 49);
+                outputs.leftStickY = 128 + (directions.y * 71);
+            }
+
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 51);
+                outputs.leftStickY = 128 + (directions.y * 68);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 54);
+                outputs.leftStickY = 128 + (directions.y * 65);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 57);
+                outputs.leftStickY = 128 + (directions.y * 61);
+            }
+        } else if (directions.diagonal && inputs.rf1 && !inputs.rf3) { // 100% mag
+            outputs.leftStickX = 128 + (directions.x * 58);
+            outputs.leftStickY = 128 + (directions.y * 92);
+
+            // Angles just for DI and Up B
+            if (inputs.rt2) {
+                outputs.leftStickX = 128 + (directions.x * 61);
+                outputs.leftStickY = 128 + (directions.y * 89);
+            }
+
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 64);
+                outputs.leftStickY = 128 + (directions.y * 85);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 67);
+                outputs.leftStickY = 128 + (directions.y * 81);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 71);
+                outputs.leftStickY = 128 + (directions.y * 76);
+            }
+        } else if (directions.diagonal && !inputs.rf1 && inputs.rf3) { // 60% mag
+            outputs.leftStickX = 128 + (directions.x * 35);
+            outputs.leftStickY = 128 + (directions.y * 55);
+
+            // Angles just for DI and Up B
+            if (inputs.rt2) {
+                outputs.leftStickX = 128 + (directions.x * 37);
+                outputs.leftStickY = 128 + (directions.y * 53);
+            }
+
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 38);
+                outputs.leftStickY = 128 + (directions.y * 51);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 40);
+                outputs.leftStickY = 128 + (directions.y * 48);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 43);
+                outputs.leftStickY = 128 + (directions.y * 46);
+            }
         }
+    }
+
+    // Shut off C-stick when using D-Pad layer.
+    if ((inputs.lt1 && inputs.lt2) || inputs.mb2) {
+        outputs.rightStickX = 128;
+        outputs.rightStickY = 128;
+    }
+
+    // Nunchuk overrides left stick.
+    if (inputs.nunchuk_connected) {
+        outputs.leftStickX = inputs.nunchuk_x;
+        outputs.leftStickY = inputs.nunchuk_y;
     }
 }

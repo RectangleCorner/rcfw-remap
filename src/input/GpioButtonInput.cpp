@@ -22,7 +22,6 @@ void GpioButtonInput::UpdateInputs(InputState &inputs) {
     for (size_t i = 0; i < _button_count; i++) {
         UpdateButtonState(inputs, i, !gpio::read_digital(_button_mappings[i].pin));
     }
-    gpio_put(PICO_DEFAULT_LED_PIN, 1);
 }
 
 void GpioButtonInput::UpdateButtonState(
