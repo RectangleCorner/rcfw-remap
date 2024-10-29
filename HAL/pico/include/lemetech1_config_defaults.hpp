@@ -18,6 +18,10 @@ const Config default_lemetech1_config = {
                 SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_NEUTRAL },
                 SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_NEUTRAL },
                 SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_NEUTRAL },
+                SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_NEUTRAL },
+                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_RF4, .socd_type = SOCD_NEUTRAL },
+                SocdPair { .button_dir1 = BTN_RT3, .button_dir2 = BTN_RT5, .socd_type = SOCD_NEUTRAL },
+                SocdPair { .button_dir1 = BTN_RT2, .button_dir2 = BTN_RT4, .socd_type = SOCD_NEUTRAL },
             },
             .button_remapping_count = 0,
             .activation_binding_count = 3,
@@ -79,6 +83,7 @@ const Config default_lemetech1_config = {
             .activation_binding_count = 3,
             .activation_binding = { BTN_LT1, BTN_MB1, BTN_RF2 },
         },
+        },
         GameModeConfig {
             .mode_id = MODE_RIVALS_OF_AETHER,
             .name = "ROA",
@@ -106,7 +111,7 @@ const Config default_lemetech1_config = {
             .activation_binding = { BTN_LT2, BTN_MB1, BTN_LF4 },
             .keyboard_mode_config = 1,
         },
-        
+
         GameModeConfig {
             .mode_id = MODE_WINGMANFGC,
             .name = "WINGMAN FGC",
@@ -115,13 +120,13 @@ const Config default_lemetech1_config = {
                 SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_NEUTRAL },
                 SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_LT1, .socd_type = SOCD_NEUTRAL },
             },
-            
+
             // .button_remapping_count = 2,
             // .button_remapping = {
             //     ButtonRemap { .physical_button = BTN_RT3, .activates = BTN_LT1 },
             //     ButtonRemap { .physical_button = BTN_RT2, .activates = BTN_RT3 },
-            // }, 
-            
+            // },
+
             .activation_binding_count = 3,
             .activation_binding = { BTN_LT2, BTN_MB1, BTN_LF1 }, 
         }, 
@@ -180,6 +185,7 @@ const Config default_lemetech1_config = {
             .activation_binding = { BTN_MB1 },
         },
 
+
     },
     .keyboard_modes_count = 1,
     .keyboard_modes = {
@@ -227,6 +233,7 @@ const Config default_lemetech1_config = {
     .travelTime = false,
     .meleeCWOS = false,
     .true_z_press = false,
+    .modx_x_wd = 51, // def: 51
     .modx_x_wd = 51, // def: 51
     .modx_y_wd = 30, // def: 30
     .meleeModZ = true,
