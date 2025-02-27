@@ -16,6 +16,7 @@ void WingmanFgcMode::UpdateDigitalOutputs(const InputState &inputs, OutputState 
     if (inputs.lt2) {
         outputs.home = inputs.mb1;
     }
+    outputs.home = inputs.mb5;
     outputs.leftStickClick = inputs.rt1;
     outputs.rightStickClick = inputs.rt4;
 

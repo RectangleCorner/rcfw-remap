@@ -79,7 +79,6 @@ const Config default_lemetech1_config = {
             .activation_binding_count = 3,
             .activation_binding = { BTN_LT1, BTN_MB1, BTN_RF2 },
         },
-        },
         GameModeConfig {
             .mode_id = MODE_RIVALS_OF_AETHER,
             .name = "ROA",
@@ -229,7 +228,6 @@ const Config default_lemetech1_config = {
     .travelTime = false,
     .meleeCWOS = false,
     .true_z_press = false,
-    .modx_x_wd = 51, // def: 51
     .modx_x_wd = 51, // def: 51
     .modx_y_wd = 30, // def: 30
     .meleeModZ = true,

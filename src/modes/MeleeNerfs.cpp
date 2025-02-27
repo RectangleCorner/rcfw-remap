@@ -31,7 +31,7 @@ void MeleeNerfs::UpdateDigitalOutputs(const InputState &inputs, OutputState &out
     outputs.start = inputs.mb1;
 
     // Activate D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c || inputs.mb2) {
         outputs.dpadUp = inputs.rt4;
         outputs.dpadDown = inputs.rt2;
         outputs.dpadLeft = inputs.rt3;
@@ -283,7 +283,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
     }
 
     // Shut off C-stick when using D-Pad layer.
-    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c) {
+    if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c || inputs.mb2) {
         outputs.rightStickX = 128;
         outputs.rightStickY = 128;
     }
