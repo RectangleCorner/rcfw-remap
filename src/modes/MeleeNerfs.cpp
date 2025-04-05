@@ -90,16 +90,21 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
             } else {
                 if (!inputs.rf1) {
                     // MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
-                    outputs.leftStickX = 128 + (directions.x * 51);
-                    outputs.leftStickY = 128 + (directions.y * 30);
+                    // outputs.leftStickX = 128 + (directions.x * 51);
+                    // outputs.leftStickY = 128 + (directions.y * 30);
+
                     // // optimal marth angle
                     // //
-                    // outputs.leftStickX = 128 + (directions.x * 54);
-                    // outputs.leftStickY = 128 + (directions.y * 29);
+                    outputs.leftStickX = 128 + (directions.x * 54);
+                    outputs.leftStickY = 128 + (directions.y * 29);
 
                     // optimal yoshi angle
                     // outputs.leftStickX = 128 + (directions.x * 53);
                     // outputs.leftStickY = 128 + (directions.y * 30);
+
+                    // sheik
+                    // outputs.leftStickX = 128 + (directions.x * 64);
+                    // outputs.leftStickY = 128 + (directions.y * 40);
                 } else {
                     // Extended angle to have magnitude similarity for DI
                     // 8500 5125 - 31.09 deg - 68 41
@@ -189,6 +194,10 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
             if (directions.y == -1) {
                 outputs.leftStickX = 128 + (directions.x * 40);
                 outputs.leftStickY = 128 + (directions.y * 68);
+
+                // sheik
+                // outputs.leftStickX = 128 + (directions.x * 40);
+                // outputs.leftStickY = 128 + (directions.y * 58);
             }
         }
 

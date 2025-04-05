@@ -26,7 +26,7 @@ GpioButtonMapping button_mappings[] = {
     { BTN_LF4, 5  },
 
     { BTN_LT1, 6  },
-    { BTN_LT2, 7  },
+    { BTN_LT2, 7  },    
 
     { BTN_MB1, 0  },
 
@@ -79,7 +79,7 @@ void setup() {
     // gpio_put(PICO_DEFAULT_LED_PIN, 1);
 
     // Attempt to load config, or write default config to flash if failed to load config.
-    if ((inputs.lt1 && inputs.lt2) || !persistence.LoadConfig(config)) {
+    if (!persistence.LoadConfig(config)) {
         persistence.SaveConfig(config);
     }
     // Create array of input sources to be used.
