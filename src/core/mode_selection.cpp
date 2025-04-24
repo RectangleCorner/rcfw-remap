@@ -74,7 +74,7 @@ void set_mode(CommunicationBackend *backend, GameModeConfig &mode_config, Config
             }
             break;
         case MODE_PROJECT_M:
-            projectm_mode.SetConfig(mode_config, config.project_m_options);
+            projectm_mode.SetConfig(mode_config, config.project_m_options, config.true_z_press);
             set_mode(backend, &projectm_mode);
             break;
         case MODE_ULTIMATE:

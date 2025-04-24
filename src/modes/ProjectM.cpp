@@ -8,9 +8,10 @@ ProjectM::ProjectM() : ControllerMode() {
     _horizontal_socd = false;
 }
 
-void ProjectM::SetConfig(GameModeConfig &config, const ProjectMOptions options) {
+void ProjectM::SetConfig(GameModeConfig &config, const ProjectMOptions options, const bool true_z) {
     InputMode::SetConfig(config);
     _options = options;
+    _true_z = true_z;
 }
 
 void ProjectM::HandleSocd(InputState &inputs) {
@@ -24,7 +25,7 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     outputs.x = inputs.rf2;
     outputs.y = inputs.rf6;
     // True Z press vs macro lightshield + A.
-    if (_options.true_z_press || inputs.lt1) {
+    if (_true_z || inputs.lt1) {
         outputs.buttonR = inputs.rf3;
     } else {
         outputs.a = inputs.rt1 || inputs.rf3;
@@ -34,7 +35,7 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     } else {
         outputs.triggerLDigital = inputs.lf4;
     }
-    outputs.dpadDown = inputs.rf8;
+    outputs.dpadUp = inputs.rf8;
     outputs.triggerRDigital = inputs.rf5;
     outputs.start = inputs.mb1;
 
@@ -49,7 +50,6 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     // Don't override dpad up if it's already pressed using the MX + MY dpad
     // layer.
     outputs.dpadUp = outputs.dpadUp;
-
 }
 
 void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs) {
@@ -201,7 +201,7 @@ void ProjectM::UpdateAnalogOutputs(const InputState &inputs, OutputState &output
     }
 
     // Send lightshield input if we are using Z = lightshield + A macro.
-    if (inputs.rf3 && !(inputs.lt1 || _options.true_z_press)) {
+    if (inputs.rf3 && !(inputs.lt1 || _true_z)) {
         outputs.triggerRAnalog = 49;
     }
 

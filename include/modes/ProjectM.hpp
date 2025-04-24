@@ -14,10 +14,11 @@
 class ProjectM : public ControllerMode {
   public:
     ProjectM();
-    void SetConfig(GameModeConfig &config, const ProjectMOptions options);
+    void SetConfig(GameModeConfig &config, const ProjectMOptions options, const bool true_z);
 
   private:
     ProjectMOptions _options;
+    bool _true_z;
     bool _horizontal_socd;
 
     void HandleSocd(InputState &inputs);

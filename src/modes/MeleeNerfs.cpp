@@ -93,8 +93,12 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     // outputs.leftStickX = 128 + (directions.x * 51);
                     // outputs.leftStickY = 128 + (directions.y * 30);
 
+                    // max legal
+                    // outputs.leftStickX = 128 + (directions.x * 51);
+                    // outputs.leftStickY = 128 + (directions.y * 26);
+
                     // // optimal marth angle
-                    // //
+                    // // 6750, 3625
                     outputs.leftStickX = 128 + (directions.x * 54);
                     outputs.leftStickY = 128 + (directions.y * 29);
 

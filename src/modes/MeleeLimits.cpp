@@ -14,6 +14,8 @@
 #define ANALOG_DASH_RIGHT (128 + 64) /*this x coordinate will dash right*/
 #define ANALOG_SDI_LEFT (128 - 56) /*this x coordinate will sdi left*/
 #define ANALOG_SDI_RIGHT (128 + 56) /*this x coordinate will sdi right*/
+#define ANALOG_UTILT_LEFT (128 - 44) /*this y coordinate will never uptilt*/
+#define ANALOG_UTILT_RIGHT (128 + 44) /*this y coordinate will never uptilt*/
 #define MELEE_SDI_RAD 3136 /* if x^2+y^2 >= this, it's diagonal SDI*/
 #define MELEE_RIM_RAD1 6185 /*if x^2+y^2 >= this, it's on the rim and 6ms*/
 #define MELEE_RIM_RAD2 6858 /*if x^2+y^2 >= this, it's past the rim and 7ms*/
@@ -38,7 +40,7 @@
 #define TIMELIMIT_DEBOUNCE 1500 //(6*250)//units of 4us; 6ms;
 #define TIMELIMIT_SIMUL \
     500 //(2*250)//units of 4us; 2ms: if the latest inputs are less than 2 ms apart then don't nerf
-        //cardiag
+        // cardiag
 
 #define TIMELIMIT_TAPSHUTOFF 16000 // 4 frames for tap jump shutoff
 
@@ -55,6 +57,8 @@
 #define TIMELIMIT_WANK 22000 //(16*5.5*250)//units of 4us; 5.5 frames
 
 #define TIMELIMIT_PIVOTTILT 32000 //(16*8*250)//units of 4us; 8 frames
+
+#define TIMELIMIT_SDI_COUNTDOWN 16000 //(16*4*250)//units of 4us; 4 frames
 
 enum pivotdir {
     P_None,
@@ -774,6 +778,21 @@ void limitOutputs(
         aHistory[currentIndexA].tt = max(aHistory[currentIndexA].tt, TRAVELTIME_SLOW);
         delayType = T_Lin;
     }
+    // if oscillating about a diagonal
+    static uint16_t sdiCountdown = 0;
+    if ((tapSDI & BITS_SDI_WANK) && (tapSDI & BITS_SDI_TAP_CRDG)) {
+        // both wank&cardiag indicates that it was oscillating about a diagonal
+        // new destinations will have 5.5 frame travel time for a duration of 4 frames from the last
+        // sdi detection event
+        sdiCountdown = TIMELIMIT_SDI_COUNTDOWN;
+        // prelimCX = ANALOG_STICK_NEUTRAL - 50;
+    }
+    if (sdiCountdown > sampleSpacing) {
+        sdiCountdown = sdiCountdown - sampleSpacing;
+        aHistory[currentIndexA].tt = max(aHistory[currentIndexA].tt, TRAVELTIME_SLOW);
+    } else {
+        sdiCountdown = 0;
+    }
 
     travelTimeCalc(
         currentTime,
@@ -868,11 +887,13 @@ void limitOutputs(
     // if it's a downtilt coordinate...
     bool pivotTilt = false;
     bool upTilt = false;
-    if (direction != P_None && prelimAY < ANALOG_DEAD_MIN) {
+    // if(direction != P_None && prelimAY < ANALOG_DEAD_MIN) {
+    if (direction != P_None && aHistory[currentIndexA].y_end < ANALOG_DEAD_MIN) {
         pivotTilt = true;
     }
     // if it's a uptilt coordinate...
-    if (direction != P_None && prelimAY > ANALOG_DEAD_MAX) {
+    // if(direction != P_None && prelimAY > ANALOG_DEAD_MAX) {
+    if (direction != P_None && aHistory[currentIndexA].y_end > ANALOG_DEAD_MAX) {
         pivotTilt = true;
         upTilt = true;
     }
@@ -896,12 +917,13 @@ void limitOutputs(
             prelimAY = ANALOG_STICK_NEUTRAL + yCoord * stretchMult / 2;
         }
         if (upTilt && timeSinceNotUptilt > TIMELIMIT_TAPSHUTOFF) {
+            // the x direction got flipped to avoid affecting diagonals
             if (direction == P_Leftright) {
-                prelimAX = ANALOG_STICK_NEUTRAL - 30;
+                prelimAX = ANALOG_STICK_NEUTRAL + 56;
             } else if (direction == P_Rightleft) {
-                prelimAX = ANALOG_STICK_NEUTRAL + 30;
+                prelimAX = ANALOG_STICK_NEUTRAL - 56;
             }
-            prelimAY = ANALOG_STICK_NEUTRAL + 30;
+            prelimAY = ANALOG_STICK_NEUTRAL + 56;
         }
     }
 
@@ -921,7 +943,8 @@ void limitOutputs(
     // increment timeSinceJump unless you want to trigger a jump
     timeSinceJump = min(timeSinceJump + 1, 100);
     if (timeSinceCrouch * sampleSpacing < TIMELIMIT_DOWNUP && prelimAY > ANALOG_DEAD_MAX &&
-        prelimAY < ANALOG_TAPJUMP && !downUpJumping) {
+        prelimAY < ANALOG_TAPJUMP && prelimAX > ANALOG_UTILT_LEFT &&
+        prelimAX < ANALOG_UTILT_RIGHT && !downUpJumping) {
         downUpJumping = true;
         timeSinceJump = 0;
     }
@@ -948,6 +971,7 @@ void limitOutputs(
             // coordinate prelimAX = aHistory[currentIndexA].x_start; make sure that future cardinal
             // travel time begins where it was before aHistory[currentIndexA].x_end = prelimAX;
             sdiIsNerfed = true;
+            // prelimCX = ANALOG_STICK_NEUTRAL + 50;
         } else if (tapSDI & (ZONE_U | ZONE_D)) {
             // lock the cross axis
             prelimAX = ANALOG_STICK_NEUTRAL;
@@ -958,26 +982,18 @@ void limitOutputs(
             // coordinate prelimAY = aHistory[currentIndexA].y_start; make sure that future cardinal
             // travel time begins where it was before aHistory[currentIndexA].y_end = prelimAY;
             sdiIsNerfed = true;
+            // prelimCX = ANALOG_STICK_NEUTRAL - 50;
         } // one or the other should occur
-        if ((tapSDI & BITS_SDI_WANK) && (tapSDI & BITS_SDI_TAP_CRDG)) {
-            // this indicates that it was oscillating about a diagonal
-            // lock to neutral
-            prelimAX = ANALOG_STICK_NEUTRAL;
-            prelimAY = ANALOG_STICK_NEUTRAL;
-            aHistory[currentIndexA].x_end = prelimAX;
-            aHistory[currentIndexA].y_end = prelimAY;
-            sdiIsNerfed = true;
-        }
         // debug to see if SDI was detected
         /*
         if(tapSDI & BITS_SDI_TAP_CARD) {
-            prelimCX = 200;
+            prelimCY = ANALOG_STICK_NEUTRAL + 50;
         }
         if(tapSDI & BITS_SDI_TAP_CRDG) {
-            prelimCY = 200;
+            prelimCY = ANALOG_STICK_NEUTRAL - 50;
         }
         if(tapSDI & BITS_SDI_WANK) {
-            prelimCX = 10;
+            prelimCY = ANALOG_STICK_NEUTRAL + 120;
         }
         */
     } else if (sdiIsNerfed) {
