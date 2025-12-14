@@ -10,7 +10,7 @@ template <size_t button_count> class DebouncedGpioButtonInput : public GpioButto
   public:
     DebouncedGpioButtonInput(
         const GpioButtonMapping button_mappings[button_count],
-        uint32_t debounce_period_ms = 5
+        uint32_t debounce_period_ms = 3
     )
         : GpioButtonInput(button_mappings, button_count) {
         _debounce_period_ms = debounce_period_ms;

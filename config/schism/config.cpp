@@ -173,7 +173,7 @@ void loop1() {
         for (size_t i = 0; i < backend_count; i++) {
             backends[i]->ScanInputs();
             backends[i]->UpdateOutputs();
-            backends[i]->LimitOutputs(quarterInterval, config.travelTime);
+            backends[i]->LimitOutputs(quarterInterval, config.travelTime, config.nem);
         }
     } else {
         isMelee = false;

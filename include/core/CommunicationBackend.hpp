@@ -23,7 +23,7 @@ class CommunicationBackend {
     virtual CommunicationBackendId BackendId();
     virtual void SetGameMode(InputMode *gamemode);
     virtual InputMode *CurrentGameMode();
-    void LimitOutputs(const uint32_t sampleSpacing, const bool travelTime);
+    void LimitOutputs(const uint32_t sampleSpacing, const bool travelTime, const bool nem);
 
     virtual void SendReport(bool isMelee) = 0;
 

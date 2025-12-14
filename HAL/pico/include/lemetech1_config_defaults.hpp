@@ -231,6 +231,7 @@ const Config default_lemetech1_config = {
     .meleeModZ = true,
     .mody_x_wd = 40, // def: 40
     .mody_y_wd = 68, // def: 68
+    .nem = false
 };
 
 // clang-format on

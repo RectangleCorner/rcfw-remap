@@ -37,6 +37,9 @@ void Rivals2::UpdateDigitalOutputs(const InputState &inputs, OutputState &output
     outputs.buttonL = inputs.rf9; // LB available to be bound
     outputs.dpadLeft = inputs.mb3;
     outputs.dpadRight = inputs.mb4;
+    outputs.dpadDown = inputs.mb5;
+    outputs.dpadUp = inputs.mb6;
+
     // Activate D-Pad layer by holding Mod X + Mod Y.
     if ((inputs.lt1 && inputs.lt2) || inputs.mb2) {
         outputs.dpadUp = inputs.rt4;
@@ -90,14 +93,13 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
         }
 
         /* Extra DI, Air Dodge, and Up B angles */
-        if (directions.diagonal &&
-            ((!inputs.rf1 && !inputs.rf3) || (inputs.rf1 && inputs.rf3))) { // 80% mag
-            outputs.leftStickX = 128 + (directions.x * 74);
-            outputs.leftStickY = 128 + (directions.y * 47);
+        if (directions.diagonal && (!inputs.rf1)) { // 80% mag
+            outputs.leftStickX = 128 + (directions.x * 69);
+            outputs.leftStickY = 128 + (directions.y * 53);
 
             if (inputs.rt1) { // angled ftilt
-                outputs.leftStickX = 128 + (directions.x * 60);
-                outputs.leftStickY = 128 + (directions.y * 53);
+                // outputs.leftStickX = 128 + (directions.x * 60);
+                // outputs.leftStickY = 128 + (directions.y * 53);
             }
 
             // Angles just for DI and Up B
@@ -146,7 +148,7 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
                 outputs.leftStickX = 128 + (directions.x * 76);
                 outputs.leftStickY = 128 + (directions.y * 71);
             }
-        } else if (directions.diagonal && !inputs.rf1 && inputs.rf3) { // 60% mag
+        } else if (directions.diagonal && (inputs.rf1 && inputs.rf3)) { // 60% mag
             outputs.leftStickX = 128 + (directions.x * 55);
             outputs.leftStickY = 128 + (directions.y * 34);
 
@@ -183,8 +185,7 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
         }
 
         /* Extra DI, Air Dodge, and Up B angles */
-        if (directions.diagonal &&
-            ((!inputs.rf1 && !inputs.rf3) || (inputs.rf1 && inputs.rf3))) { // 80% mag
+        if (directions.diagonal && (!inputs.rf1)) { // 80% mag
             outputs.leftStickX = 128 + (directions.x * 47);
             outputs.leftStickY = 128 + (directions.y * 74);
 
@@ -234,7 +235,7 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
                 outputs.leftStickX = 128 + (directions.x * 71);
                 outputs.leftStickY = 128 + (directions.y * 76);
             }
-        } else if (directions.diagonal && !inputs.rf1 && inputs.rf3) { // 60% mag
+        } else if (directions.diagonal && (inputs.rf1 && inputs.rf3)) { // 60% mag
             outputs.leftStickX = 128 + (directions.x * 35);
             outputs.leftStickY = 128 + (directions.y * 55);
 

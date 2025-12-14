@@ -36,6 +36,10 @@ void ProjectM::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
         outputs.triggerLDigital = inputs.lf4;
     }
     outputs.dpadUp = inputs.rf8;
+    outputs.dpadLeft = inputs.mb3;
+    outputs.dpadRight = inputs.mb4;
+    outputs.dpadDown = inputs.mb5;
+
     outputs.triggerRDigital = inputs.rf5;
     outputs.start = inputs.mb1;
 

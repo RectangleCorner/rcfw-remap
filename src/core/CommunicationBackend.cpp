@@ -5,6 +5,7 @@
 #include "core/state.hpp"
 #include "modes/HaxLimits.hpp"
 #include "modes/MeleeLimits.hpp"
+#include "modes/NewEnglandLimits.hpp"
 
 #include <config.pb.h>
 
@@ -65,10 +66,30 @@ InputMode *CommunicationBackend::CurrentGameMode() {
     return _gamemode;
 }
 
-void CommunicationBackend::LimitOutputs(const uint32_t sampleSpacing, const bool travelTime) {
+void CommunicationBackend::LimitOutputs(
+    const uint32_t sampleSpacing,
+    const bool travelTime,
+    const bool nem
+) {
     if (travelTime) {
         limitOutputs(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
     } else {
-        limitOutputsHax(sampleSpacing, AB_A /*doesn't matter*/, _inputs, _outputs, _finalOutputs);
+        if (nem) {
+            limitOutputsNewEngland(
+                sampleSpacing,
+                AB_A /*doesn't matter*/,
+                _inputs,
+                _outputs,
+                _finalOutputs
+            );
+        } else {
+            limitOutputsHax(
+                sampleSpacing,
+                AB_A /*doesn't matter*/,
+                _inputs,
+                _outputs,
+                _finalOutputs
+            );
+        }
     }
 }

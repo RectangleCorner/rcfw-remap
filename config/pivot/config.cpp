@@ -26,7 +26,7 @@ GpioButtonMapping button_mappings[] = {
     { BTN_LF4, 5  },
 
     { BTN_LT1, 6  },
-    { BTN_LT2, 7  },    
+    { BTN_LT2, 7  },
 
     { BTN_MB1, 0  },
 
@@ -160,7 +160,7 @@ void loop1() {
         for (size_t i = 0; i < backend_count; i++) {
             backends[i]->ScanInputs();
             backends[i]->UpdateOutputs();
-            backends[i]->LimitOutputs(quarterInterval, config.travelTime);
+            backends[i]->LimitOutputs(quarterInterval, config.travelTime, config.nem);
         }
     } else {
         isMelee = false;

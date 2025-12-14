@@ -95,8 +95,8 @@ void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &o
                 outputs.leftStickY = 128 + (directions.y * _options.custom_airdodge.y);
             } else {
                 // MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
-                outputs.leftStickX = 128 + (directions.x * 51);
-                outputs.leftStickY = 128 + (directions.y * 30);
+                // outputs.leftStickX = 128 + (directions.x * 51);
+                // outputs.leftStickY = 128 + (directions.y * 30);
 
                 // longest legal
                 //  MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
@@ -108,8 +108,8 @@ void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &o
                 // outputs.leftStickY = 128 + (directions.y * 28);
 
                 // sheik
-                // outputs.leftStickX = 128 + (directions.x * 64);
-                // outputs.leftStickY = 128 + (directions.y * 40);
+                outputs.leftStickX = 128 + (directions.x * 64);
+                outputs.leftStickY = 128 + (directions.y * 40);
             }
         }
 
@@ -191,12 +191,12 @@ void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &o
             outputs.leftStickY = 128 + (directions.y * 70);
             // MY + L, R, LS, and MS + q3/4 = 5000 8500 = 40 68
             if (directions.y == -1) {
-                outputs.leftStickX = 128 + (directions.x * 40);
-                outputs.leftStickY = 128 + (directions.y * 68);
+                // outputs.leftStickX = 128 + (directions.x * 40);
+                // outputs.leftStickY = 128 + (directions.y * 68);
 
                 // sheik
-                // outputs.leftStickX = 128 + (directions.x * 40);
-                // outputs.leftStickY = 128 + (directions.y * 58);
+                outputs.leftStickX = 128 + (directions.x * 40);
+                outputs.leftStickY = 128 + (directions.y * 58);
             }
         }
 
@@ -295,8 +295,8 @@ void Melee20Button::UpdateAnalogOutputs(const InputState &inputs, OutputState &o
     }
 
     // Nunchuk overrides left stick.
-    if (inputs.nunchuk_connected) {
-        outputs.leftStickX = inputs.nunchuk_x;
-        outputs.leftStickY = inputs.nunchuk_y;
-    }
+    // if (inputs.nunchuk_connected) {
+    //     outputs.leftStickX = inputs.nunchuk_x;
+    //     outputs.leftStickY = inputs.nunchuk_y;
+    // }
 }

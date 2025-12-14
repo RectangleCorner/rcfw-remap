@@ -22,6 +22,8 @@ void Ultimate::UpdateDigitalOutputs(const InputState &inputs, OutputState &outpu
     }
     outputs.dpadDown = inputs.rf7;
     outputs.dpadUp = inputs.rf8;
+    outputs.dpadLeft = inputs.mb3;
+    outputs.dpadRight = inputs.mb4;
 
     // Turn on D-Pad layer by holding Mod X + Mod Y or Nunchuk C button.
     if ((inputs.lt1 && inputs.lt2) || inputs.nunchuk_c || inputs.mb2) {

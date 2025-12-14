@@ -146,7 +146,7 @@ const Config default_config = {
             .backend_id = COMMS_BACKEND_XINPUT,
             .default_mode_config = 1,
             .activation_binding_count = 1,
-            .activation_binding = { BTN_RF4 },
+            .activation_binding = { BTN_RF5 },
         },
         CommunicationBackendConfig {
             .backend_id = COMMS_BACKEND_DINPUT,
@@ -230,6 +230,7 @@ const Config default_config = {
     .meleeModZ = false,
     .mody_x_wd = 40, // def: 40
     .mody_y_wd = 68, // def: 68
+    .nem = false
 };
 
 // clang-format on

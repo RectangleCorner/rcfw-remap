@@ -90,8 +90,8 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
             } else {
                 if (!inputs.rf1) {
                     // MX + L, R, LS, and MS + q1/2/3/4 = 6375 3750 = 51 30
-                    // outputs.leftStickX = 128 + (directions.x * 51);
-                    // outputs.leftStickY = 128 + (directions.y * 30);
+                    outputs.leftStickX = 128 + (directions.x * 51);
+                    outputs.leftStickY = 128 + (directions.y * 30);
 
                     // max legal
                     // outputs.leftStickX = 128 + (directions.x * 51);
@@ -99,8 +99,8 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
 
                     // // optimal marth angle
                     // // 6750, 3625
-                    outputs.leftStickX = 128 + (directions.x * 54);
-                    outputs.leftStickY = 128 + (directions.y * 29);
+                    // outputs.leftStickX = 128 + (directions.x * 54);
+                    // outputs.leftStickY = 128 + (directions.y * 29);
 
                     // optimal yoshi angle
                     // outputs.leftStickX = 128 + (directions.x * 53);
@@ -301,11 +301,9 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
         outputs.rightStickY = 128;
     }
 
-    /*
     // Nunchuk overrides left stick.
     if (inputs.nunchuk_connected) {
         outputs.leftStickX = inputs.nunchuk_x;
         outputs.leftStickY = inputs.nunchuk_y;
     }
-    */
 }
