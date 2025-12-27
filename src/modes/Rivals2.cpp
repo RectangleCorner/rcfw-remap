@@ -74,10 +74,10 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
     bool shield_button_pressed = inputs.lf4 || inputs.rf5;
     if (directions.diagonal) {
         if (directions.y == -1 && (shield_button_pressed)) {
-            outputs.leftStickX = 128 + (directions.x * 99);
-            outputs.leftStickY = 128 + (directions.y * 71);
+            outputs.leftStickX = 128 + (directions.x * 109);
+            outputs.leftStickY = 128 + (directions.y * 79);
         } else {
-            outputs.leftStickX = 128 + (directions.x * 127);
+            outputs.leftStickX = 128 + (directions.x * 126);
             outputs.leftStickY = 128 + (directions.y * 127);
         }
     }
@@ -85,17 +85,17 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
 
     if (inputs.lt1) {
         if (directions.horizontal) {
-            outputs.leftStickX = 128 + (directions.x * 88);
+            outputs.leftStickX = 128 + (directions.x * 97);
         }
 
         if (directions.vertical) {
-            outputs.leftStickY = 128 + (directions.y * 71);
+            outputs.leftStickY = 128 + (directions.y * 79);
         }
 
         /* Extra DI, Air Dodge, and Up B angles */
         if (directions.diagonal && (!inputs.rf1)) { // 80% mag
-            outputs.leftStickX = 128 + (directions.x * 69);
-            outputs.leftStickY = 128 + (directions.y * 53);
+            outputs.leftStickX = 128 + (directions.x * 76);
+            outputs.leftStickY = 128 + (directions.y * 59);
 
             if (inputs.rt1) { // angled ftilt
                 // outputs.leftStickX = 128 + (directions.x * 60);
@@ -104,161 +104,161 @@ void Rivals2::UpdateAnalogOutputs(const InputState &inputs, OutputState &outputs
 
             // Angles just for DI and Up B
             if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 71);
-                outputs.leftStickY = 128 + (directions.y * 49);
-            }
-
-            // Angles just for DI
-            if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 68);
-                outputs.leftStickY = 128 + (directions.y * 51);
-            }
-
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 65);
+                outputs.leftStickX = 128 + (directions.x * 79);
                 outputs.leftStickY = 128 + (directions.y * 54);
             }
 
-            if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 61);
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 75);
                 outputs.leftStickY = 128 + (directions.y * 57);
             }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 72);
+                outputs.leftStickY = 128 + (directions.y * 60);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 68);
+                outputs.leftStickY = 128 + (directions.y * 63);
+            }
         } else if (directions.diagonal && inputs.rf1 && !inputs.rf3) { // 100% mag
-            outputs.leftStickX = 128 + (directions.x * 92);
-            outputs.leftStickY = 128 + (directions.y * 58);
+            outputs.leftStickX = 128 + (directions.x * 102);
+            outputs.leftStickY = 128 + (directions.y * 64);
 
             // Angles just for DI and Up B
             if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 89);
-                outputs.leftStickY = 128 + (directions.y * 61);
+                outputs.leftStickX = 128 + (directions.x * 98);
+                outputs.leftStickY = 128 + (directions.y * 68);
             }
 
             // Angles just for DI
             if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 85);
-                outputs.leftStickY = 128 + (directions.y * 64);
-            }
-
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 81);
-                outputs.leftStickY = 128 + (directions.y * 67);
-            }
-
-            if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 76);
+                outputs.leftStickX = 128 + (directions.x * 94);
                 outputs.leftStickY = 128 + (directions.y * 71);
             }
-        } else if (directions.diagonal && (inputs.rf1 && inputs.rf3)) { // 60% mag
-            outputs.leftStickX = 128 + (directions.x * 55);
-            outputs.leftStickY = 128 + (directions.y * 34);
-
-            // Angles just for DI and Up B
-            if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 53);
-                outputs.leftStickY = 128 + (directions.y * 37);
-            }
-            // Angles just for DI
-            if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 51);
-                outputs.leftStickY = 128 + (directions.y * 38);
-            }
 
             if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 48);
-                outputs.leftStickY = 128 + (directions.y * 40);
+                outputs.leftStickX = 128 + (directions.x * 90);
+                outputs.leftStickY = 128 + (directions.y * 74);
             }
 
             if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 46);
-                outputs.leftStickY = 128 + (directions.y * 43);
+                outputs.leftStickX = 128 + (directions.x * 84);
+                outputs.leftStickY = 128 + (directions.y * 79);
+            }
+        } else if (directions.diagonal && (inputs.rf1 && inputs.rf3)) { // 60% mag
+            outputs.leftStickX = 128 + (directions.x * 61);
+            outputs.leftStickY = 128 + (directions.y * 38);
+
+            // Angles just for DI and Up B
+            if (inputs.rt2) {
+                outputs.leftStickX = 128 + (directions.x * 59);
+                outputs.leftStickY = 128 + (directions.y * 41);
+            }
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 57);
+                outputs.leftStickY = 128 + (directions.y * 42);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 53);
+                outputs.leftStickY = 128 + (directions.y * 44);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 51);
+                outputs.leftStickY = 128 + (directions.y * 48);
             }
         }
     }
 
     if (inputs.lt2) {
         if (directions.horizontal) {
-            outputs.leftStickX = 128 + (directions.x * 75);
+            outputs.leftStickX = 128 + (directions.x * 83);
         }
 
         if (directions.vertical) {
-            outputs.leftStickY = 128 + (directions.y * 98);
+            outputs.leftStickY = 128 + (directions.y * 108);
         }
 
         /* Extra DI, Air Dodge, and Up B angles */
         if (directions.diagonal && (!inputs.rf1)) { // 80% mag
-            outputs.leftStickX = 128 + (directions.x * 47);
-            outputs.leftStickY = 128 + (directions.y * 74);
+            outputs.leftStickX = 128 + (directions.x * 52);
+            outputs.leftStickY = 128 + (directions.y * 82);
 
             // Angles just for DI and Up B
             if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 49);
-                outputs.leftStickY = 128 + (directions.y * 71);
+                outputs.leftStickX = 128 + (directions.x * 54);
+                outputs.leftStickY = 128 + (directions.y * 79);
             }
 
             // Angles just for DI
             if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 51);
+                outputs.leftStickX = 128 + (directions.x * 57);
+                outputs.leftStickY = 128 + (directions.y * 75);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 60);
+                outputs.leftStickY = 128 + (directions.y * 72);
+            }
+
+            if (inputs.rt5) {
+                outputs.leftStickX = 128 + (directions.x * 63);
                 outputs.leftStickY = 128 + (directions.y * 68);
             }
-
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 54);
-                outputs.leftStickY = 128 + (directions.y * 65);
-            }
-
-            if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 57);
-                outputs.leftStickY = 128 + (directions.y * 61);
-            }
         } else if (directions.diagonal && inputs.rf1 && !inputs.rf3) { // 100% mag
-            outputs.leftStickX = 128 + (directions.x * 58);
-            outputs.leftStickY = 128 + (directions.y * 92);
+            outputs.leftStickX = 128 + (directions.x * 64);
+            outputs.leftStickY = 128 + (directions.y * 102);
 
             // Angles just for DI and Up B
             if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 61);
-                outputs.leftStickY = 128 + (directions.y * 89);
+                outputs.leftStickX = 128 + (directions.x * 68);
+                outputs.leftStickY = 128 + (directions.y * 98);
             }
 
             // Angles just for DI
             if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 64);
-                outputs.leftStickY = 128 + (directions.y * 85);
+                outputs.leftStickX = 128 + (directions.x * 71);
+                outputs.leftStickY = 128 + (directions.y * 94);
             }
 
             if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 67);
-                outputs.leftStickY = 128 + (directions.y * 81);
+                outputs.leftStickX = 128 + (directions.x * 74);
+                outputs.leftStickY = 128 + (directions.y * 90);
             }
 
             if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 71);
-                outputs.leftStickY = 128 + (directions.y * 76);
+                outputs.leftStickX = 128 + (directions.x * 79);
+                outputs.leftStickY = 128 + (directions.y * 84);
             }
         } else if (directions.diagonal && (inputs.rf1 && inputs.rf3)) { // 60% mag
-            outputs.leftStickX = 128 + (directions.x * 35);
-            outputs.leftStickY = 128 + (directions.y * 55);
+            outputs.leftStickX = 128 + (directions.x * 39);
+            outputs.leftStickY = 128 + (directions.y * 61);
 
             // Angles just for DI and Up B
             if (inputs.rt2) {
-                outputs.leftStickX = 128 + (directions.x * 37);
+                outputs.leftStickX = 128 + (directions.x * 41);
+                outputs.leftStickY = 128 + (directions.y * 59);
+            }
+
+            // Angles just for DI
+            if (inputs.rt3) {
+                outputs.leftStickX = 128 + (directions.x * 42);
+                outputs.leftStickY = 128 + (directions.y * 57);
+            }
+
+            if (inputs.rt4) {
+                outputs.leftStickX = 128 + (directions.x * 44);
                 outputs.leftStickY = 128 + (directions.y * 53);
             }
 
-            // Angles just for DI
-            if (inputs.rt3) {
-                outputs.leftStickX = 128 + (directions.x * 38);
-                outputs.leftStickY = 128 + (directions.y * 51);
-            }
-
-            if (inputs.rt4) {
-                outputs.leftStickX = 128 + (directions.x * 40);
-                outputs.leftStickY = 128 + (directions.y * 48);
-            }
-
             if (inputs.rt5) {
-                outputs.leftStickX = 128 + (directions.x * 43);
-                outputs.leftStickY = 128 + (directions.y * 46);
+                outputs.leftStickX = 128 + (directions.x * 48);
+                outputs.leftStickY = 128 + (directions.y * 51);
             }
         }
     }
