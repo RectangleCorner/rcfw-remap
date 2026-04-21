@@ -57,7 +57,7 @@ const Config default_config = {
             .socd_pairs_count = 2,
             .socd_pairs = {
                 SocdPair { .button_dir1 = BTN_LF3, .button_dir2 = BTN_LF1, .socd_type = SOCD_NEUTRAL },
-                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_LT1, .socd_type = SOCD_NEUTRAL },
+                SocdPair { .button_dir1 = BTN_LF2, .button_dir2 = BTN_LT1, .socd_type = SOCD_DIR2_PRIORITY },
             },
             /*
             .button_remapping_count = 2,
@@ -213,18 +213,18 @@ const Config default_config = {
     .default_backend_config = 1,
     .default_usb_backend_config = 1,
     .melee_options = {
-        .crouch_walk_os = false,
+        .crouch_walk_os = true,
         .disable_ledgedash_socd_override = false,
     },
     .project_m_options = {
-        .true_z_press = false,
+        .true_z_press = true,
         .disable_ledgedash_socd_override = false,
     },
     .rumble = false,
     .limitOutputs = true,
     .travelTime = false,
     .meleeCWOS = false,
-    .true_z_press = false,
+    .true_z_press = true,
     .modx_x_wd = 51, // def: 51 
     .modx_y_wd = 30, // def: 30
     .meleeModZ = false,

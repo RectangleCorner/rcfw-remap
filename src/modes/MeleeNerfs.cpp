@@ -98,7 +98,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     // outputs.leftStickY = 128 + (directions.y * 26);
 
                     // // optimal marth angle
-                    // // 6750, 3625
+                    // // 6750, 3625 - 28.24 deg - 54 29
                     // outputs.leftStickX = 128 + (directions.x * 54);
                     // outputs.leftStickY = 128 + (directions.y * 29);
 
@@ -126,6 +126,11 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 6625 4125 - 31.91deg - 53 33 - modX + cLeft
                 // 6375 4625 - 35.96deg - 51 37 - modX + cUp
                 // 6125 5125 - 39.92deg - 49 41 - modX + cRight
+
+                // preserve slow dash and wavedash angle for marth
+                // outputs.leftStickX = 128 + (directions.x * 58);
+                // outputs.leftStickY = 128 + (directions.y * 31);
+
                 outputs.leftStickX = 128 + (directions.x * 58);
                 outputs.leftStickY = 128 + (directions.y * 25);
                 if (inputs.rt2) {
@@ -151,8 +156,14 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft
                 // 7250 5250 - 35.91deg - 58 42 - modX + B + cUp
                 // 6375 5250 - 39.47deg - 51 42 - modX + B + cRight
-                outputs.leftStickX = 128 + (directions.x * 73);
-                outputs.leftStickY = 128 + (directions.y * 31);
+
+                // marth's slow dash
+                // 8125 4375 - 28.30 deg - 65 35
+                outputs.leftStickX = 128 + (directions.x * 65);
+                outputs.leftStickY = 128 + (directions.y * 35);
+
+                // outputs.leftStickX = 128 + (directions.x * 73);
+                // outputs.leftStickY = 128 + (directions.y * 31);
                 if (inputs.rt2) {
                     outputs.leftStickX = 128 + (directions.x * 70);
                     outputs.leftStickY = 128 + (directions.y * 36);
