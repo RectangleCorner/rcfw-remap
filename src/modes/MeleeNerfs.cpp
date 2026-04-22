@@ -159,7 +159,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 }
             } else {
                 /* Extended Up B Angles */
-                // 9125 3875 - 23.01deg - 73 31 - modX + B
+                // 9125 3875 - 23.01deg - 73 31 - modX + B (replaced by magnified wavedash angle)
                 // 8750 4500 - 27.22deg - 70 36 - modX + B + cDown - optionally swapped with above
                 // angle as marth
                 // 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft
@@ -167,6 +167,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 6375 5250 - 39.47deg - 51 42 - modX + B + cRight
 
                 // magnify our wavedash and slow dash angle for DI
+                // 8750 4750 - 28.50deg - 70 38 - mod X + B
                 outputs.leftStickX = 128 + (directions.x * 70);
                 outputs.leftStickY = 128 + (directions.y * 38);
                 // outputs.leftStickX = 128 + (directions.x * 73);
