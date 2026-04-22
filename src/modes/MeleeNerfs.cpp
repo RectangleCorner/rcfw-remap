@@ -115,7 +115,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     // outputs.leftStickX = 128 + (directions.x * 68);
                     // outputs.leftStickY = 128 + (directions.y * 41);
 
-                    // marth's extended angle
+                    // marth's corresponding extended angle
                     // 8250 4500 - 28.61 deg - 66 36 - modX + B
                     outputs.leftStickX = 128 + (directions.x * 66);
                     outputs.leftStickY = 128 + (directions.y * 36);
@@ -132,7 +132,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 6375 4625 - 35.96deg - 51 37 - modX + cUp
                 // 6125 5125 - 39.92deg - 49 41 - modX + cRight
 
-                // marth's slow dash
+                // slow dash
                 // 8250 4500 - 28.61 deg - 66 36 - modX + B
                 outputs.leftStickX = 128 + (directions.x * 66);
                 outputs.leftStickY = 128 + (directions.y * 36);
