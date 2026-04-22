@@ -161,9 +161,10 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 /* Extended Up B Angles */
                 // 9125 3875 - 23.01deg - 73 31 - modX + B
                 // 8750 4500 - 27.22deg - 70 36 - modX + B + cDown - optionally swapped with above
-                // angle as marth 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft 7250 5250
-                // - 35.91deg - 58 42 - modX + B + cUp 6375 5250 - 39.47deg - 51 42 - modX + B +
-                // cRight
+                // angle as marth
+                // 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft
+                // 7250 5250 - 35.91deg - 58 42 - modX + B + cUp
+                // 6375 5250 - 39.47deg - 51 42 - modX + B + cRight
 
                 // magnify our wavedash and slow dash angle for DI
                 outputs.leftStickX = 128 + (directions.x * 70);
@@ -236,8 +237,9 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 3250 7625 - 23.09deg - 26 61 - modY
                 // 3625 7000 - 27.38deg - 29 56 - modY + cDown
                 // 4500 6875 - 33.21deg - 36 55 - modY + cLeft (this is shield drop straight down
-                // but the cstick will buffer) 5125 7000 - 36.21deg - 41 56 - modY + cUp 5750 7125
-                // - 38.90deg - 46 57 - modY + cRight
+                // but the cstick will buffer)
+                // 5125 7000 - 36.21deg - 41 56 - modY + cUp
+                // 5750 7125 - 38.90deg - 46 57 - modY + cRight
 
                 // outputs.leftStickX = 128 + (directions.x * 26);
                 // outputs.leftStickY = 128 + (directions.y * 61);
