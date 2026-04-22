@@ -233,8 +233,9 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 3250 7625 - 23.09deg - 26 61 - modY
                 // 3625 7000 - 27.38deg - 29 56 - modY + cDown
                 // 4500 6875 - 33.21deg - 36 55 - modY + cLeft (this is shield drop straight down
-                // but the cstick will buffer) 5125 7000 - 36.21deg - 41 56 - modY + cUp 5750 7125
-                // - 38.90deg - 46 57 - modY + cRight
+                // but the cstick will buffer)
+                // 5125 7000 - 36.21deg - 41 56 - modY + cUp
+                // 5750 7125 - 38.90deg - 46 57 - modY + cRight
                 outputs.leftStickX = 128 + (directions.x * 26);
                 outputs.leftStickY = 128 + (directions.y * 61);
                 if (inputs.rt2) {
