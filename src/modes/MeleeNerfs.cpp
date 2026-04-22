@@ -97,7 +97,7 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     // outputs.leftStickX = 128 + (directions.x * 51);
                     // outputs.leftStickY = 128 + (directions.y * 26);
 
-                    // // optimal marth angle
+                    // optimal marth wavedash angle
                     // // 6750, 3625 - 28.24 deg - 54 29
                     outputs.leftStickX = 128 + (directions.x * 54);
                     outputs.leftStickY = 128 + (directions.y * 29);
@@ -112,8 +112,13 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 } else {
                     // Extended angle to have magnitude similarity for DI
                     // 8500 5125 - 31.09 deg - 68 41
-                    outputs.leftStickX = 128 + (directions.x * 68);
-                    outputs.leftStickY = 128 + (directions.y * 41);
+                    // outputs.leftStickX = 128 + (directions.x * 68);
+                    // outputs.leftStickY = 128 + (directions.y * 41);
+
+                    // marth's extended angle
+                    // 8250 4500 - 28.61 deg - 66 36 - modX + B
+                    outputs.leftStickX = 128 + (directions.x * 66);
+                    outputs.leftStickY = 128 + (directions.y * 36);
                 }
             }
         }
@@ -127,14 +132,16 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 6375 4625 - 35.96deg - 51 37 - modX + cUp
                 // 6125 5125 - 39.92deg - 49 41 - modX + cRight
 
-                // preserve slow dash and wavedash angle for marth
-                // 7250, 3875 - 28.12 deg - 58
-                outputs.leftStickX = 128 + (directions.x * 58);
-                outputs.leftStickY = 128 + (directions.y * 31);
-
+                // marth's slow dash
+                // 8250 4500 - 28.61 deg - 66 36 - modX + B
+                outputs.leftStickX = 128 + (directions.x * 66);
+                outputs.leftStickY = 128 + (directions.y * 36);
                 // outputs.leftStickX = 128 + (directions.x * 58);
                 // outputs.leftStickY = 128 + (directions.y * 25);
                 if (inputs.rt2) {
+                    // perserve better marth DI angle as firefox angle
+                    // outputs.leftStickX = 128 + (directions.x * 58);
+                    // outputs.leftStickY = 128 + (directions.y * 25);
                     outputs.leftStickX = 128 + (directions.x * 56);
                     outputs.leftStickY = 128 + (directions.y * 29);
                 }
@@ -153,21 +160,22 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
             } else {
                 /* Extended Up B Angles */
                 // 9125 3875 - 23.01deg - 73 31 - modX + B
-                // 8750 4500 - 27.22deg - 70 36 - modX + B + cDown
-                // 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft
-                // 7250 5250 - 35.91deg - 58 42 - modX + B + cUp
-                // 6375 5250 - 39.47deg - 51 42 - modX + B + cRight
+                // 8750 4500 - 27.22deg - 70 36 - modX + B + cDown - optionally swapped with above
+                // angle as marth 8500 5250 - 31.70deg - 68 42 - modX + B + cLeft 7250 5250
+                // - 35.91deg - 58 42 - modX + B + cUp 6375 5250 - 39.47deg - 51 42 - modX + B +
+                // cRight
 
-                // marth's slow dash
-                // 8250 4500 - 28.61 deg - 66 36
-                outputs.leftStickX = 128 + (directions.x * 66);
-                outputs.leftStickY = 128 + (directions.y * 36);
-
+                // magnify our wavedash and slow dash angle for DI
+                outputs.leftStickX = 128 + (directions.x * 70);
+                outputs.leftStickY = 128 + (directions.y * 38);
                 // outputs.leftStickX = 128 + (directions.x * 73);
                 // outputs.leftStickY = 128 + (directions.y * 31);
                 if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 70);
-                    outputs.leftStickY = 128 + (directions.y * 36);
+                    // better marth DI angle
+                    outputs.leftStickX = 128 + (directions.x * 73);
+                    outputs.leftStickY = 128 + (directions.y * 31);
+                    // outputs.leftStickX = 128 + (directions.x * 70);
+                    // outputs.leftStickY = 128 + (directions.y * 36);
                 }
                 if (inputs.rt3) {
                     outputs.leftStickX = 128 + (directions.x * 68);
@@ -178,8 +186,8 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     outputs.leftStickY = 128 + (directions.y * 42);
                 }
                 if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 51);
-                    outputs.leftStickY = 128 + (directions.y * 42);
+                    outputs.leftStickX = 128 + (directions.x * 73);
+                    outputs.leftStickY = 128 + (directions.y * 31);
                 }
             }
         }
@@ -230,11 +238,16 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 4500 6875 - 33.21deg - 36 55 - modY + cLeft (this is shield drop straight down
                 // but the cstick will buffer) 5125 7000 - 36.21deg - 41 56 - modY + cUp 5750 7125
                 // - 38.90deg - 46 57 - modY + cRight
-                outputs.leftStickX = 128 + (directions.x * 26);
-                outputs.leftStickY = 128 + (directions.y * 61);
+
+                // outputs.leftStickX = 128 + (directions.x * 26);
+                // outputs.leftStickY = 128 + (directions.y * 61);
+                // OPTIONAL: swap mod Y angles for consistency with mod X as marth
+                // (changes muscle memory if one is used to mod + B DI )
+                outputs.leftStickX = 128 + (directions.x * 29);
+                outputs.leftStickY = 128 + (directions.y * 56);
                 if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 29);
-                    outputs.leftStickY = 128 + (directions.y * 56);
+                    outputs.leftStickX = 128 + (directions.x * 26);
+                    outputs.leftStickY = 128 + (directions.y * 61);
                 }
                 if (inputs.rt3) {
                     outputs.leftStickX = 128 + (directions.x * 36);
@@ -245,8 +258,12 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                     outputs.leftStickY = 128 + (directions.y * 56);
                 }
                 if (inputs.rt5) {
-                    outputs.leftStickX = 128 + (directions.x * 46);
-                    outputs.leftStickY = 128 + (directions.y * 57);
+                    // swap mod Y angles for consistency with mod X as marth
+                    outputs.leftStickX = 128 + (directions.x * 26);
+                    outputs.leftStickY = 128 + (directions.y * 61);
+
+                    // outputs.leftStickX = 128 + (directions.x * 46);
+                    // outputs.leftStickY = 128 + (directions.y * 57);
                 }
             } else {
                 /* Extended Up B Angles */
@@ -255,11 +272,19 @@ void MeleeNerfs::UpdateAnalogOutputs(const InputState &inputs, OutputState &outp
                 // 5375 8250 - 33.08deg - 42 68 - modY + B + cLeft
                 // 5750 7875 - 36.14deg - 46 63 - modY + B + cUp
                 // 5750 7125 - 38.90deg - 46 57 - modY + B + cRight
-                outputs.leftStickX = 128 + (directions.x * 31);
-                outputs.leftStickY = 128 + (directions.y * 73);
+
+                // preserve mod Y angle swap if doing optional swap for consistency with mod X as
+                // marth (changes muscle memory if one is used to mod + B DI )
+                outputs.leftStickX = 128 + (directions.x * 37);
+                outputs.leftStickY = 128 + (directions.y * 70);
+
+                // outputs.leftStickX = 128 + (directions.x * 31);
+                // outputs.leftStickY = 128 + (directions.y * 73);
                 if (inputs.rt2) {
-                    outputs.leftStickX = 128 + (directions.x * 37);
-                    outputs.leftStickY = 128 + (directions.y * 70);
+                    outputs.leftStickX = 128 + (directions.x * 31);
+                    outputs.leftStickY = 128 + (directions.y * 73);
+                    // outputs.leftStickX = 128 + (directions.x * 37);
+                    // outputs.leftStickY = 128 + (directions.y * 70);
                 }
                 if (inputs.rt3) {
                     outputs.leftStickX = 128 + (directions.x * 43);
